@@ -1,0 +1,16 @@
+master (0) [2]: Starting master...
+master (0) [2]: New master parameter discretization: 32 parameter dofs.
+GaussNewton [1]: Step 0: N=14008, m(u-z)=5.96e-07, beta r(a)=0, J=5.96e-07, error=0.884
+GaussNewton [0]: 
+GaussNewton [0]: Step 1: starting
+GaussNewton [1]: Step 1: solving...
+GaussNewton [1]: Step 1: inner solver failed with residual reduction of 1.85e-28; accepting anyway
+GaussNewton [1]: Step 1: computing state/adjoint updates
+GaussNewton [2]: Step 1: computing step length
+GaussNewton [1]: Step 1, alpha: 0.999, final residual: 7.8402e-08
+GaussNewton [1]: Step 1: Writing solutions...
+GaussNewton [1]: Step 1: postprocessing
+GaussNewton [1]: Step 1: N=14008, m(u-z)=1.25e-11, beta r(a)=3.86e-13, J=1.28e-11, error=0.884
+GaussNewton [0]: Step 1: stop
+GaussNewton [0]: 
+main 0 [0]: Done! Closing down master
