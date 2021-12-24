@@ -82,5 +82,5 @@ make gem5 && make diff
 
 - Most host outputs are the same between x86 and power8 except for 508, 510, 527 with minor floating point precision discrepancy. We put these output files from power8 in `ref` folder.
 
-- Output results of floating point precision may differ from binaries compiled by different compiler or the same compiler from different architectures.
+- Output results of floating point precision may differ from binaries compiled by different compilers or the same compiler from different architectures.
 
