@@ -78,6 +78,16 @@ make gem5 && make diff
 
 
 
+## Tips
+
+If you wanna test different gem5 versions or different SPEC binaries, you can make multiple copies of`runspec_gem5_power` folder for different tests.
+
+Run `make clean-all` to delete everything generated and bring the folder back to its original state.
+
+Run `make help` in `runspec_gem5_power` to get help information.
+
+
+
 ## Known Issues
 
 - Most host outputs are the same between x86 and power8 except for 508, 510, 527 with minor floating point precision discrepancy. We put these output files from power8 in `ref` folder.
