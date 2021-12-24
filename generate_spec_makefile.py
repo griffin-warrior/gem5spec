@@ -3,6 +3,8 @@
 import os, sys
 import time
 
+# This script generates the basic skeleton of the test scripts and folder structure.
+
 # Global VARs
 # TODO 
 spec_path = '/home/dell/cpu2017'
@@ -84,10 +86,12 @@ def gen_makefile(report_dir, label):
         makefile.write('\n' + '\t' + '$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt')
         makefile.write('\n')
         makefile.write('\n' + 'diff:')
-        makefile.write('\n' + '\t' + '@diff host_out.log gem5_out.log >/dev/null 2>&1 || echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_diff.log ; true')
+        makefile.write('\n' + '\t' + '@diff host_out.log gem5_out.log >/dev/null 2>&1 \\')
+        makefile.write('\n' + '\t' + '\t&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \\')
+        makefile.write('\n' + '\t' + '\t|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee -a ../fail_gem5_diff.log ; true')
         makefile.write('\n')
         makefile.write('\n' + 'ls:')
-        makefile.write('\n' + '\t' + 'find -type f -exec ls -lFh {} \+')
+        makefile.write('\n' + '\t' + 'find -maxdepth 1 -type f -exec ls -lFh {} \+')
         makefile.write('\n')
         makefile.write('\n' + 'clean:')
         makefile.write('\n' + '\t' + 'rm -rf *.log *.txt')

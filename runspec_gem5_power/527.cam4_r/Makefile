@@ -12,7 +12,7 @@ gem5: $(EXECUTABLE)
 	$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS)" $(GEM5_PY_OPT)
 	@chmod -x *gem5.log
 	grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
-	sed -i 's/DATE.\+TIME.\+//g' gem5_out.log
+	@sed -i 's/DATE.\+TIME.\+//g' gem5_out.log
 
 $(EXECUTABLE):
 	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
@@ -30,10 +30,12 @@ objdump: $(EXECUTABLE)
 	$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt
 
 diff:
-	@diff ../ref/527/host_ppc_out.log gem5_out.log >/dev/null 2>&1 || echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_diff.log ; true
+	@diff ../ref/527/host_ppc_out.log gem5_out.log >/dev/null 2>&1 \
+		&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \
+		|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee -a ../fail_gem5_diff.log ; true
 
 ls:
-	find -type f -exec ls -lFh {} \+
+	find -maxdepth 1 -type f -exec ls -lFh {} \+
 
 clean:
 	rm -rf *.log *.txt  ccsm_timing h0.nc

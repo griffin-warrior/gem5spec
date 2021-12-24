@@ -26,10 +26,12 @@ objdump: $(EXECUTABLE)
 	$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt
 
 diff:
-	@diff *.264 >/dev/null 2>&1 || echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_diff.log ; true
+	@diff BuckBunny_New-host.264 BuckBunny_New-gem5.264 >/dev/null 2>&1 \
+		&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \
+		|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee -a ../fail_gem5_diff.log ; true
 
 ls:
-	find -type f -exec ls -lFh {} \+
+	find -maxdepth 1 -type f -exec ls -lFh {} \+
 
 clean:
 	rm -rf *.log *.txt

@@ -28,10 +28,16 @@ objdump: $(EXECUTABLE)
 	$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt
 
 diff:
-	@diff host_out.log gem5_out.log >/dev/null 2>&1 || echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_diff.log ; true
+	@[ $$(uname -m) == x86_64 ] \
+		&& $(BENCH_PATH)/exe/diffwrf_521_base.x86 wrfout_d01_2000-01-24_12_10_00 $(BENCH_PATH)/data/test/compare/wrf_reference_01 > diff.txt \
+		|| $(BENCH_PATH)/exe/diffwrf_521_base.$(LABEL) wrfout_d01_2000-01-24_12_10_00 $(BENCH_PATH)/data/test/compare/wrf_reference_01 > diff.txt
+	@sed -i 's/Just plot  F/Just plot   F/g' diff.txt
+	@diff diff.txt $(BENCH_PATH)/data/test/output/diffwrf_output_01.txt >/dev/null 2>&1 \
+		&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \
+		|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee ../fail_gem5_diff.log
 
 ls:
-	find -type f -exec ls -lFh {} \+
+	find -maxdepth 1 -type f -exec ls -lFh {} \+
 
 clean:
 	rm -rf *.log *.txt wrfout* namelist.output
