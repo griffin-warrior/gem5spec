@@ -13,7 +13,7 @@ host: $(EXECUTABLE)
 gem5: $(EXECUTABLE)
 	$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS4GEM5)" $(GEM5_PY_OPT)
 	@chmod -x *gem5.log
-	grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
+	@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
 	@sed -i 's/gem5\.//g' host_out.log
 
 $(EXECUTABLE):

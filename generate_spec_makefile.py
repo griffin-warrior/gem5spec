@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
-import os, sys
-import time
+###############################
+#    NOT INTENDED FOR USERS   #
+###############################
 
 # This script generates the basic skeleton of the test scripts and folder structure.
+
+import os, sys
+import time
 
 # Global VARs
 # TODO 
@@ -72,7 +76,7 @@ def gen_makefile(report_dir, label):
         makefile.write('\n' + 'gem5: $(EXECUTABLE)')
         makefile.write('\n' + '\t' + '$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS)" $(GEM5_PY_OPT)')
         makefile.write('\n' + '\t' + '@chmod -x *gem5.log')
-        makefile.write('\n' + '\t' + 'grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true')
+        makefile.write('\n' + '\t' + '@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true')
         makefile.write('\n')
         makefile.write('\n' + '$(EXECUTABLE):')
         makefile.write('\n' + '\t' + 'ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)')

@@ -2,19 +2,19 @@
 
 ## Test Environment
 
-We only test SPEC base subset because currently gem5-power does not support multi-thread.
+We only test SPEC base subset because currently gem5-power does not support running multithreaded programs.
 
 Test passed under the environment descripted below:
 
 Gem5 output from
-Arch: `X86_64`
-SPEC Compiler: `powerpc64le-linux-gnu-gcc/g++/gfortran` (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
-OS: `Ubuntu 20.04.3 LTS`
+- Arch: `x86_64`
+- SPEC Compiler: `powerpc64le-linux-gnu-gcc/g++/gfortran` (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 (cross compiled on x86_64)
+- OS: `Ubuntu 20.04.3 LTS`
 
 Host output from
-Arch: `ppec64le`
-SPEC Compiler: `powerpc64le-linux-gnu-gcc/g++/gfortran` (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 (compiled on x86_64)
-OS: `Ubuntu 20.04.3 LTS`
+- Arch: `ppec64le`
+- SPEC Compiler: `powerpc64le-linux-gnu-gcc/g++/gfortran` (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 (cross compiled on x86_64)
+- OS: `Ubuntu 20.04.3 LTS`
 
 
 
@@ -31,7 +31,7 @@ runcpu --action=build --config=ppc intrate fprate
 
 ### Step 2: Config Script ENVs
 
-Edit `runspec_gem5_power/Makefile.inc` according to your `SPEC_HOME`.
+Edit `runspec_gem5_power/Makefile.inc` according to your `SPEC_HOME` and gem5 repo path.
 
 ### Step 3: Run Host
 
@@ -61,9 +61,11 @@ cd runspec_gem5_power/
 make diff
 ```
 
+
+
 ## Debug Benchmarks Separately
 
-The steps above demonstrates how to run all of the 24 benchmarks together in parallel.
+The steps above demonstrate how to run all of the 24 benchmarks together in parallel.
 
 Running test can be very flexible. You can also go to a specific folder to run and debug a single benchmark. 
 
