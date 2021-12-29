@@ -59,6 +59,8 @@ If there are failed benchmarks, they will be recorded in `fail_gem5_diff.log`.
 ```bash
 cd runspec_gem5_power/
 make diff
+# No "FAILED" will show up if all passed
+make diff | grep FAILED
 ```
 
 

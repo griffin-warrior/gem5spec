@@ -10,7 +10,7 @@ host: $(EXECUTABLE)
 	$(TIMEH) ./$(EXECUTABLE) $(ARGS) 1> host_out.log 2> host_err.log
 
 gem5: $(EXECUTABLE)
-	$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS)" $(GEM5_PY_OPT)
+	$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS4GEM5)" $(GEM5_PY_OPT)
 	@chmod -x *gem5.log
 	@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
 
@@ -26,7 +26,7 @@ objdump: $(EXECUTABLE)
 	$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt
 
 diff:
-	@diff output-host.tga test_output-gem5.tga >/dev/null 2>&1 \
+	@diff test_output-host.tga test_output-gem5.tga >/dev/null 2>&1 \
 		&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \
 		|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee -a ../fail_gem5_diff.log ; true
 
