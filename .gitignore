@@ -1,0 +1,9 @@
+*
+!*Makefile
+!Makefile.inc
+!generate_spec_makefile.py
+!spec-config
+!*.cfg
+!runspec_gem5_power/
+!*.md
+!.gitignore
