@@ -19,3 +19,6 @@ OBJDUMP         = /opt/at15.0/bin/powerpc64le-linux-gnu-objdump
 
 TIMEH           = /usr/bin/time --format="Host Consumed Time: %E"
 TIMEG           = /usr/bin/time --format="GEM5 Consumed Time: %E"
+
+SHELL          := /bin/bash
+

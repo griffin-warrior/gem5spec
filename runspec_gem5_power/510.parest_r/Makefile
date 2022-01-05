@@ -24,8 +24,15 @@ echo:
 objdump: $(EXECUTABLE)
 	$(OBJDUMP) -d ./$(EXECUTABLE) > obj.txt
 
+ifeq ($(LABEL),ppc)
+  REF_LOG_FILE = ../ref/510/host_ppc_out.log
+endif
+ifeq ($(LABEL),at)
+  REF_LOG_FILE = host_out.log
+endif
+
 diff:
-	@diff ../ref/510/host_ppc_out.log gem5_out.log >/dev/null 2>&1 \
+	@diff $(REF_LOG_FILE) gem5_out.log >/dev/null 2>&1 \
 		&& echo $$(basename $(BENCH_PATH)) DIFF PASSED \
 		|| echo $$(basename $(BENCH_PATH)) DIFF FAILED | tee -a ../fail_gem5_diff.log ; true
 
