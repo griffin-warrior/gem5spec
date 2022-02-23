@@ -7,6 +7,7 @@ ARGS            =
 
 host: $(EXECUTABLE)
 	$(TIMEH) ./$(EXECUTABLE) $(ARGS) 1> host_out.log 2> host_err.log
+	@mv wrfout_d01_2000-01-24_12_10_00 wrfout_d01_2000-01-24_12_10_00-host
 
 gem5: $(EXECUTABLE)
 	$(TIMEG) $(GEM5) $(GEM5_OPT) $(GEM5_PY) -c $(EXECUTABLE) -o " $(ARGS)" $(GEM5_PY_OPT)

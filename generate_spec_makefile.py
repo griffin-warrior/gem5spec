@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-###############################
-#    NOT INTENDED FOR USERS   #
-###############################
+################################
+#    NOT INTENDED FOR USERS    #
+################################
 
 # This script generates the basic skeleton of the test scripts and folder structure.
 
