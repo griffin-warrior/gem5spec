@@ -1,3 +1,5 @@
+DATE = $(shell date +%Y%m%d%H%M%S)
+GEM5_REPO_PATH = $(shell awk '$$1=="GEM5_REPO_PATH"{print $$3}' Makefile.inc)
 
 .PHONY: all
 
@@ -5,7 +7,32 @@ all: help
 
 host: host_500 host_502 host_503 host_505 host_507 host_508 host_510 host_511 host_519 host_520 host_521 host_523 host_525 host_526 host_527 host_531 host_538 host_541 host_544 host_548 host_549 host_554 host_557 host_999
 
-gem5: gem5_500 gem5_502 gem5_503 gem5_505 gem5_507 gem5_508 gem5_510 gem5_511 gem5_519 gem5_520 gem5_521 gem5_523 gem5_525 gem5_526 gem5_527 gem5_531 gem5_538 gem5_541 gem5_544 gem5_548 gem5_549 gem5_554 gem5_557 gem5_999
+gem5: log-pre gem5_500 gem5_502 gem5_503 gem5_505 gem5_507 gem5_508 gem5_510 gem5_511 gem5_519 gem5_520 gem5_521 gem5_523 gem5_525 gem5_526 gem5_527 gem5_531 gem5_538 gem5_541 gem5_544 gem5_548 gem5_549 gem5_554 gem5_557 gem5_999
+	@make log-post
+
+log-pre:
+	@LOG_DIR=$(DATE); \
+	echo $(DATE) > DATE.log; \
+	mkdir -p log/$${LOG_DIR}; \
+	echo  $(GEM5_REPO_PATH) > log/$${LOG_DIR}/summary.txt; \
+	git -C $(GEM5_REPO_PATH) log -1 --pretty=oneline >> log/$${LOG_DIR}/summary.txt; \
+	echo  >> log/$${LOG_DIR}/summary.txt; \
+	git -C $(GEM5_REPO_PATH) status >> log/$${LOG_DIR}/summary.txt; \
+	echo  >> log/$${LOG_DIR}/summary.txt; \
+	cat Makefile.inc >> log/$${LOG_DIR}/summary.txt
+
+log-post:
+	@LOG_DIR=$$(cat DATE.log); \
+	mkdir -p log/$${LOG_DIR}; \
+	BENCH_LIST=$$(find -maxdepth 1 -type d -regex ".*r" -exec basename {} \; | sort -h); \
+	for name in $${BENCH_LIST}; do \
+		[[ -e $${name}/m5out/config.ini ]] || continue; \
+		mkdir -p log/$${LOG_DIR}/$${name}; \
+		[[ -e $${name}/gem5_stats.log   ]] && cp $${name}/gem5_stats.log   log/$${LOG_DIR}/$${name}/; \
+		[[ -e $${name}/stderr_gem5.log  ]] && cp $${name}/stderr_gem5.log  log/$${LOG_DIR}/$${name}/; \
+		[[ -e $${name}/stdout_gem5.log  ]] && cp $${name}/stdout_gem5.log  log/$${LOG_DIR}/$${name}/; \
+		[[ -e $${name}/m5out/config.ini ]] && cp $${name}/m5out/config.ini log/$${LOG_DIR}/$${name}/; \
+	done
 
 host_500:
 	@cd  500.perlbench_r; make host || echo 500.perlbench_r >> ../fail_host.log
@@ -106,15 +133,15 @@ gem5_999:
 	@-make gem5 -C 999.specrand_ir
 
 diff:
-	find -type d -regex ".*r" -exec make diff -C {} \;
+	find -maxdepth 1 -type d -regex ".*r" -exec make diff -C {} \;
 
 clean:
 	rm -rf *.log
-	find -type d -regex ".*r" -exec make clean -C {} \;
+	find -maxdepth 1 -type d -regex ".*r" -exec make clean -C {} \;
 
 clean-all:
 	rm -rf *.log
-	find -type d -regex ".*r" -exec make clean-all -C {} \;
+	find -maxdepth 1 -type d -regex ".*r" -exec make clean-all -C {} \;
 
 time:
 	@echo grep -nr "^Host Consumed Time:"
