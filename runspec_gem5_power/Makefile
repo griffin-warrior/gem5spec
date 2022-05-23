@@ -132,6 +132,56 @@ gem5_557:
 gem5_999:
 	@-make gem5 -C 999.specrand_ir
 
+
+trace_500:
+	@-make trace -C 500.perlbench_r
+trace_502:
+	@-make trace -C 502.gcc_r
+trace_503:
+	@-make trace -C 503.bwaves_r
+trace_505:
+	@-make trace -C 505.mcf_r
+trace_507:
+	@-make trace -C 507.cactuBSSN_r
+trace_508:
+	@-make trace -C 508.namd_r
+trace_510:
+	@-make trace -C 510.parest_r
+trace_511:
+	@-make trace -C 511.povray_r
+trace_519:
+	@-make trace -C 519.lbm_r
+trace_520:
+	@-make trace -C 520.omnetpp_r
+trace_521:
+	@-make trace -C 521.wrf_r
+trace_523:
+	@-make trace -C 523.xalancbmk_r
+trace_525:
+	@-make trace -C 525.x264_r
+trace_526:
+	@-make trace -C 526.blender_r
+trace_527:
+	@-make trace -C 527.cam4_r
+trace_531:
+	@-make trace -C 531.deepsjeng_r
+trace_538:
+	@-make trace -C 538.imagick_r
+trace_541:
+	@-make trace -C 541.leela_r
+trace_544:
+	@-make trace -C 544.nab_r
+trace_548:
+	@-make trace -C 548.exchange2_r
+trace_549:
+	@-make trace -C 549.fotonik3d_r
+trace_554:
+	@-make trace -C 554.roms_r
+trace_557:
+	@-make trace -C 557.xz_r
+trace_999:
+	@-make trace -C 999.specrand_ir
+
 diff:
 	find -maxdepth 1 -type d -regex ".*r" -exec make diff -C {} \;
 
