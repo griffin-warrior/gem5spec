@@ -10,6 +10,8 @@ host: host_500 host_502 host_503 host_505 host_507 host_508 host_510 host_511 ho
 gem5: log-pre gem5_500 gem5_502 gem5_503 gem5_505 gem5_507 gem5_508 gem5_510 gem5_511 gem5_519 gem5_520 gem5_521 gem5_523 gem5_525 gem5_526 gem5_527 gem5_531 gem5_538 gem5_541 gem5_544 gem5_548 gem5_549 gem5_554 gem5_557 gem5_999
 	@make log-post
 
+trace: trace_500 trace_502 trace_503 trace_505 trace_507 trace_508 trace_510 trace_511 trace_519 trace_520 trace_521 trace_523 trace_525 trace_526 trace_527 trace_531 trace_538 trace_541 trace_544 trace_548 trace_549 trace_554 trace_557 trace_999
+
 log-pre:
 	@LOG_DIR=$(DATE); \
 	echo $(DATE) > DATE.log; \
@@ -132,6 +134,55 @@ gem5_557:
 gem5_999:
 	@-make gem5 -C 999.specrand_ir
 
+trace_500:
+	@-make trace -C 500.perlbench_r
+trace_502:
+	@-make trace -C 502.gcc_r
+trace_503:
+	@-make trace -C 503.bwaves_r
+trace_505:
+	@-make trace -C 505.mcf_r
+trace_507:
+	@-make trace -C 507.cactuBSSN_r
+trace_508:
+	@-make trace -C 508.namd_r
+trace_510:
+	@-make trace -C 510.parest_r
+trace_511:
+	@-make trace -C 511.povray_r
+trace_519:
+	@-make trace -C 519.lbm_r
+trace_520:
+	@-make trace -C 520.omnetpp_r
+trace_521:
+	@-make trace -C 521.wrf_r
+trace_523:
+	@-make trace -C 523.xalancbmk_r
+trace_525:
+	@-make trace -C 525.x264_r
+trace_526:
+	@-make trace -C 526.blender_r
+trace_527:
+	@-make trace -C 527.cam4_r
+trace_531:
+	@-make trace -C 531.deepsjeng_r
+trace_538:
+	@-make trace -C 538.imagick_r
+trace_541:
+	@-make trace -C 541.leela_r
+trace_544:
+	@-make trace -C 544.nab_r
+trace_548:
+	@-make trace -C 548.exchange2_r
+trace_549:
+	@-make trace -C 549.fotonik3d_r
+trace_554:
+	@-make trace -C 554.roms_r
+trace_557:
+	@-make trace -C 557.xz_r
+trace_999:
+	@-make trace -C 999.specrand_ir
+
 diff:
 	find -maxdepth 1 -type d -regex ".*r" -exec make diff -C {} \;
 
@@ -166,3 +217,4 @@ help:
 	@echo ""
 	@echo "Check fail_[host|gem5].log to see failed benchmarks."
 	@echo ""
+
