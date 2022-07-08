@@ -13,7 +13,7 @@ Gem5 output from
 - OS: `Ubuntu 20.04.3 LTS`
 
 Host output from
-- Arch: `ppec64le`
+- Arch: `ppc64le`
 - SPEC Compiler: `powerpc64le-linux-gnu-gcc/g++/gfortran` (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 (cross compiled on x86_64)
 - SPEC Compiler: Advance Toolchain 15.0 on x86
 - OS: `Ubuntu 20.04.3 LTS`
