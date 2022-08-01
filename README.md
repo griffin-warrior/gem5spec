@@ -4,7 +4,7 @@
 
 We only test SPEC base subset because currently gem5-power does not support running multithreaded programs.
 
-Test passed under the environment descripted below:
+Test passed under the environment described below:
 
 Gem5 output from
 - Arch: `x86_64`
