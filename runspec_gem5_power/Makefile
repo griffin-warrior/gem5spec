@@ -155,14 +155,29 @@ help:
 	@echo ""
 	@echo "  Run all SPEC on host:"
 	@echo "    make host -jN"
+	@echo ""
 	@echo "  Run all SPEC via GEM5:"
 	@echo "    make gem5 -jN"
+	@echo ""
 	@echo "  Clean log and temp files:"
 	@echo "    make clean"
+	@echo ""
 	@echo "  Clean all except Makefile:"
 	@echo "    make clean-all"
+	@echo ""
 	@echo "  Get consumed runtime:"
 	@echo "    make time"
 	@echo ""
+	@echo "  Get all IPC stats:"
+	@echo "    make ipc"
+	@echo ""
 	@echo "Check fail_[host|gem5].log to see failed benchmarks."
 	@echo ""
+
+ipc: get-ipc
+get-ipc:
+	@echo -e "\n\tBENCHMARK        IPC"      
+	@echo -e "    -----------------------------"      
+	@grep -nr system.cpu.ipc */gem5_stats.log | sort | sed 's/\/gem5_stats.log:[[:digit:]]\+:system.cpu.ipc \+/,/g' | sed 's/ \+#.*$$//g' | tee log/$$(cat DATE.log)-ipc.csv | column -t -s, | cat -n
+	@#grep -nr system.cpu.ipc */gem5_stats.log | sort | sed 's/\/gem5_stats.log:258:system.cpu.ipc \+/,/g' | sed 's/ \+#.*$//g' > log/$((cat DATE.log))-ipc.csv
+	@echo -e "\nIPC stats is also saved in:  log/$$(cat DATE.log)-ipc.csv"
