@@ -15,13 +15,13 @@ gem5: $(EXECUTABLE)
 	@sed -i 's/DATE.\+TIME.\+//g' gem5_out.log
 
 $(EXECUTABLE):
-	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
+	ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)
 	-make link
 
 link:
-	ln -s $(BENCH_PATH)/data/test/input/drv_in
-	ln -s $(BENCH_PATH)/data/test/input/atm_in
-	find $(BENCH_PATH)/data/all/input/* -type f -exec ln -s {} \;
+	ln -snf $(BENCH_PATH)/data/test/input/drv_in
+	ln -snf $(BENCH_PATH)/data/test/input/atm_in
+	find $(BENCH_PATH)/data/all/input/* -type f -exec ln -snf {} \;
 
 echo:
 	@echo './$(EXECUTABLE) $(ARGS)'

@@ -79,7 +79,7 @@ def gen_makefile(report_dir, label):
         makefile.write('\n' + '\t' + '@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true')
         makefile.write('\n')
         makefile.write('\n' + '$(EXECUTABLE):')
-        makefile.write('\n' + '\t' + 'ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)')
+        makefile.write('\n' + '\t' + 'ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)')
         makefile.write('\n')
         makefile.write('\n' + 'link:')
         makefile.write('\n')

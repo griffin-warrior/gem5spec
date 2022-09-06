@@ -14,11 +14,11 @@ gem5: $(EXECUTABLE)
 	@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
 
 $(EXECUTABLE):
-	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
+	ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)
 	-make link
 
 link:
-	find $(BENCH_PATH)/data/test/input/* -type f -exec ln -s {} \;
+	find $(BENCH_PATH)/data/test/input/* -type f -exec ln -snf {} \;
 	[ -e OBJ.dat ] || unxz -f OBJ.dat.xz
 
 echo:

@@ -17,7 +17,7 @@ gem5: $(EXECUTABLE)
 	@sed -i 's/gem5\.//g' gem5_out.log
 
 $(EXECUTABLE):
-	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
+	ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)
 
 link:
 

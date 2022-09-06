@@ -15,12 +15,12 @@ gem5: $(EXECUTABLE)
 	@grep -nr "^Error" stderr_gem5.log && echo $$(basename $(BENCH_PATH)) >> ../fail_gem5_crash.log ; true
 
 $(EXECUTABLE):
-	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
+	ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)
 	-make link
 
 link:
-	ln -s $(BENCH_PATH)/data/test/input/namelist.input
-	find $(BENCH_PATH)/data/all/input/* -type f -exec ln -s {} \;
+	ln -snf $(BENCH_PATH)/data/test/input/namelist.input
+	find $(BENCH_PATH)/data/all/input/* -type f -exec ln -snf {} \;
 
 echo:
 	@echo './$(EXECUTABLE) $(ARGS)'

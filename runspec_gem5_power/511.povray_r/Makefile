@@ -17,12 +17,12 @@ gem5: $(EXECUTABLE)
 
 
 $(EXECUTABLE):
-	ln -s $(BENCH_PATH)/exe/$(EXECUTABLE)
+	ln -snf $(BENCH_PATH)/exe/$(EXECUTABLE)
 	-make link
 
 link:
-	ln -s $(BENCH_PATH)/data/test/input/SPEC-benchmark-test.pov
-	find $(BENCH_PATH)/data/all/input/*.inc -type f -exec ln -s {} \;
+	ln -snf $(BENCH_PATH)/data/test/input/SPEC-benchmark-test.pov
+	find $(BENCH_PATH)/data/all/input/*.inc -type f -exec ln -snf {} \;
 
 echo:
 	@echo './$(EXECUTABLE) $(ARGS)'
